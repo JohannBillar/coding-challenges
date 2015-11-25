@@ -9,29 +9,29 @@ class ImageTest < Minitest::Test
     assert_equal(
       [
         [1, 0], [0, 1], [2, 1], [1, 2]
-      ].sort,
-      image.neighboring_points(1, 1).sort
-    )
+        ].sort,
+        image.neighboring_points(1, 1).sort
+        )
 
     assert_equal(
       [[0, 1], [1, 0]].sort,
       image.neighboring_points(0, 0)
-    )
+      )
 
     assert_equal(
       [[2, 0], [3, 1]].sort,
       image.neighboring_points(3, 0).sort
-    )
+      )
 
     assert_equal(
       [[0, 2], [1, 3]].sort,
       image.neighboring_points(0, 3).sort
-    )
+      )
 
     assert_equal(
       [[3,2], [2, 3]].sort,
       image.neighboring_points(3, 3).sort
-    )
+      )
   end
 
   def test_find_one_coordinates
@@ -42,7 +42,7 @@ class ImageTest < Minitest::Test
         [1, 1, 1, 1],
         [1, 1, 1, 1]
       ]
-    )
+      )
 
     assert_equal(
       [
@@ -50,9 +50,9 @@ class ImageTest < Minitest::Test
         [3, 3], [2, 2], [1, 0], [1, 3], 
         [2, 3], [3, 1], [0, 2], [0, 1], 
         [2, 0], [3, 2], [2, 1], [1, 2]
-      ].sort,
-      image.find_one_coordinates.sort
-    )
+        ].sort,
+        image.find_one_coordinates.sort
+        )
   end
 
   def test_set_to_one
@@ -63,7 +63,7 @@ class ImageTest < Minitest::Test
         [0, 0, 0, 0],
         [0, 0, 0, 0]
       ]
-    )
+      )
     image.set_to_one(1, 3)
 
     assert_equal(
@@ -72,9 +72,9 @@ class ImageTest < Minitest::Test
         [0, 0, 0, 0],
         [0, 0, 0, 0],
         [0, 1, 0, 0]
-      ],
-    image.data
-    )
+        ],
+        image.data
+        )
   end
 
   def test_blur
@@ -87,7 +87,7 @@ class ImageTest < Minitest::Test
         [0, 0, 0, 0, 0, 1],
         [0, 0, 1, 0, 0, 0]
       ]
-    )
+      )
 
     assert_equal(
       [
@@ -97,9 +97,9 @@ class ImageTest < Minitest::Test
         [1, 0, 0, 0, 0, 1],
         [0, 0, 1, 0, 1, 1],
         [0, 1, 1, 1, 0, 1]
-      ],
-      image.blur!
-    )
+        ],
+        image.blur!
+        )
 
     image = Image.new(
       [
@@ -110,7 +110,7 @@ class ImageTest < Minitest::Test
         [0, 0, 0, 0, 0, 0],
         [1, 0, 0, 0, 0, 1]
       ]
-    )
+      )
 
     assert_equal(
       [
@@ -120,9 +120,9 @@ class ImageTest < Minitest::Test
         [0, 0, 1, 1, 1, 0],
         [1, 0, 0, 1, 0, 1],
         [1, 1, 0, 0, 1, 1]
-      ],
-      image.blur!
-    )
+        ],
+        image.blur!
+        )
 
     image = Image.new(
       [
@@ -133,7 +133,7 @@ class ImageTest < Minitest::Test
         [0, 0, 1, 0, 0, 0],
         [1, 0, 0, 0, 1, 1]
       ]
-    )
+      )
 
     assert_equal(
       [
@@ -143,9 +143,9 @@ class ImageTest < Minitest::Test
         [1, 0, 1, 0, 0, 0],
         [1, 1, 1, 1, 1, 1],
         [1, 1, 1, 1, 1, 1]
-      ],
-      image.blur!
-    )
+        ],
+        image.blur!
+        )
   end
 
 end

@@ -20,7 +20,7 @@ class Image
   def initialize(data)
     @data = data
   end
-  
+
   def output_image
     @data.each do |line|
       puts line.join
@@ -51,6 +51,28 @@ class Image
       y = coord[1]
 
       x >= 0 && (x <= (width - 1)) && y >= 0 && (y <= (height - 1))
+    end
+  end
+
+  def manhattan_neighboring_points(x, y, n)
+    possible_coords = []
+    possible_coords += neighboring_points(x, y)
+
+    (n-1).times do
+      possible_coords.each do |x, y|
+        possible_coords += neighboring_points(x, y)
+      end
+    end    
+    possible_coords.uniq!
+
+    one_coord = []
+    one_coord << x << y
+
+    possible_coords.select do |coord|
+      possible_x = coord[0]
+      possible_y = coord[1]
+
+      (coord != one_coord) && possible_x >= 0 && (possible_x <= (width - 1)) && possible_y >= 0 && (possible_y <= (height - 1))
     end
   end
 
@@ -89,17 +111,31 @@ class Image
     @data
   end
 
+  # step 4
+  def manhattan_blur!(n)
+    find_one_coordinates.each do |coord|
+      x = coord[0]
+      y = coord[1]
+      found_points = manhattan_neighboring_points(x, y, n)
+      found_points.each do |point|
+        x = point[0]
+        y = point[1]
+        set_to_one(x, y)
+      end
+    end
+    @data
+  end
+
 end
 
 image = Image.new(
   [
-    [1, 0, 1, 0, 1],
     [0, 0, 0, 0, 0],
-    [1, 0, 1, 0, 1],
     [0, 0, 0, 0, 0],
-    [1, 0, 1, 0, 1]
+    [0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 1],
+    [0, 0, 0, 0, 0],
   ]
   )
-image.blur!
+image.manhattan_blur!(3)
 image.output_image
-puts "====="
